@@ -1,0 +1,66 @@
+package com.example.menuu;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class Order extends AppCompatActivity {
+
+    TextView quantity,foodname,foodprice;
+    ImageView foodphoto;
+    int count=1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_order);
+
+        quantity = (TextView) findViewById(R.id.quantity);
+        foodname = (TextView) findViewById(R.id.foodname);
+        foodprice= (TextView) findViewById(R.id.foodprice);
+        foodphoto= (ImageView) findViewById(R.id.foodphoto);
+        String Temp1 = getIntent().getStringExtra("Foodname");
+        String Temp2 = getIntent().getStringExtra("Foodprice");
+        Integer Temp3 = getIntent().getIntExtra("Foodphoto",0);
+
+
+        foodname.setText(Temp1);
+        foodprice.setText(Temp2);
+        foodphoto.setImageResource(Temp3);
+
+
+    }
+
+    public void Decrement(View view)
+    {
+        count--;
+        if(count>=1)
+        {
+            quantity.setText(""+count);
+            //foodprice.setText(Integer.parseInt(foodprice.toString())*count);
+
+        }
+        else
+            Toast.makeText(this, "Quantity can not be less than 1 !!", Toast.LENGTH_SHORT).show();;
+
+
+    }
+    public void Increment(View view)
+    {
+        count++;
+        if(count>=1)
+        {
+            quantity.setText(""+count);
+            //foodprice.setText(Integer.parseInt(foodprice.toString())*count);
+        }
+
+        else
+            Toast.makeText(this, "Quantity can not be less than 1 !!", Toast.LENGTH_SHORT).show();;
+
+    }
+}

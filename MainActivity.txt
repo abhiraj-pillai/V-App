@@ -1,0 +1,74 @@
+package com.example.menuu;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.menuu.R.drawable.samosa;
+
+public class MainActivity extends AppCompatActivity {
+
+    ListView listview;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        listview = findViewById(R.id.listview);
+
+        ArrayList<Food> arrayList= new ArrayList<>();
+
+        arrayList.add(new Food(R.drawable.samosa,"Samosa","20"));
+        arrayList.add(new Food(R.drawable.dahipuri,"Dahi Puri","30"));
+        arrayList.add(new Food(R.drawable.dosa,"Dosa","35"));
+        arrayList.add(new Food(R.drawable.idli,"Idli","25"));
+        arrayList.add(new Food(R.drawable.misalpav,"Misav Pav","35"));
+        arrayList.add(new Food(R.drawable.sandwich,"Samosa","20"));
+        arrayList.add(new Food(R.drawable.manchurian,"Manchurian","45"));
+        arrayList.add(new Food(R.drawable.meduvada,"Medu Wada","35"));
+        arrayList.add(new Food(R.drawable.sevpuri,"Sev Puri","25"));
+        arrayList.add(new Food(R.drawable.scezfrankie,"Schezwan Frankie","35"));
+
+
+        FoodAdapter foodAdapter = new FoodAdapter(this, R.layout.list_row,arrayList);
+
+        listview.setAdapter(foodAdapter);
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String Foodname = arrayList.get(position).Name;
+                String Foodprice = arrayList.get(position).Price;
+                Integer Foodphoto = arrayList.get(position).Image;
+
+                Intent intent = new Intent(MainActivity.this,Order.class);
+                intent.putExtra(" Foodname",Foodname);
+                intent.putExtra("Foodprice",Foodprice);
+                intent.putExtra("Foodphoto",Foodphoto);
+                startActivity(intent);
+
+            }
+        });
+
+
+    }
+
+}
