@@ -99,16 +99,16 @@ public class ccdMenu extends AppCompatActivity {
         listView =  findViewById(R.id.menuList);
         final ArrayList<menuItem> item = new ArrayList<>();
 
-        item.add(new menuItem(R.drawable.dosa,"Dosa",40));
-        item.add(new menuItem(R.drawable.dosa,"Dosa1",50));
-        item.add(new menuItem(R.drawable.dosa,"Dosa2",50));
-        item.add(new menuItem(R.drawable.dosa,"Dosa3",80));
-        item.add(new menuItem(R.drawable.dosa,"Dosa4",20));
-        item.add(new menuItem(R.drawable.dosa,"Dosa5",40));
-        item.add(new menuItem(R.drawable.dosa,"Dosa6",90));
-        item.add(new menuItem(R.drawable.dosa,"Dosa7",10));
-        item.add(new menuItem(R.drawable.dosa,"Dosa8",30));
-        item.add(new menuItem(R.drawable.dosa,"Dosa9",40));
+        item.add(new menuItem(R.drawable.dosa,"Espresso",50));
+        item.add(new menuItem(R.drawable.dosa,"Tropical Iceberg",45));
+        item.add(new menuItem(R.drawable.dosa,"Kadak Chai",50));
+        item.add(new menuItem(R.drawable.dosa,"Veg Cup Noodles",35));
+        item.add(new menuItem(R.drawable.dosa,"Manchow Cup Noodles",35));
+        item.add(new menuItem(R.drawable.dosa,"Chicken Cup Noodles",35));
+        item.add(new menuItem(R.drawable.dosa,"Chicken Spinach Sandwich",80));
+        item.add(new menuItem(R.drawable.dosa,"Lemon Slushie",20));
+        item.add(new menuItem(R.drawable.dosa,"Chocolate Shot",35));
+        item.add(new menuItem(R.drawable.dosa,"Brownie",60));
 
         ListAdaptedMain update = new ListAdaptedMain(this,R.layout.listviewstructure_main,item);
 
