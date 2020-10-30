@@ -30,15 +30,15 @@ public class vloungeMenu extends AppCompatActivity {
         listView =  findViewById(R.id.menuList);
 
         final ArrayList<menuItem> item = new ArrayList<>();
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
+        item.add(new menuItem(R.drawable.meduvada,"Veg Sandwich",30));
+        item.add(new menuItem(R.drawable.meduvada,"Veg Cheese Toast",45));
+        item.add(new menuItem(R.drawable.meduvada,"Veg Cheese Schezwan Toast",65));
+        item.add(new menuItem(R.drawable.meduvada,"Sev Puri",30));item.add(new menuItem(R.drawable.meduvada,"Bhel Puri",30));item.add(new menuItem(R.drawable.meduvada,"Dahi Chaat",30));
+        item.add(new menuItem(R.drawable.meduvada,"Wada Pav",15));
+        item.add(new menuItem(R.drawable.meduvada,"Samosa",20));
+        item.add(new menuItem(R.drawable.meduvada,"Misal Pav",25));
+        item.add(new menuItem(R.drawable.meduvada,"Tea",10));
+        item.add(new menuItem(R.drawable.meduvada,"Coffee",10));
 
 
 
