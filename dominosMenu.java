@@ -23,15 +23,15 @@ public class dominosMenu extends AppCompatActivity {
         listView =  findViewById(R.id.menuList);
 
         final ArrayList<menuItem> item = new ArrayList<>();
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
-        item.add(new menuItem(R.drawable.meduvada,"Meduvada",40));
+        item.add(new menuItem(R.drawable.meduvada,"Golden Corn Pizza",60));
+        item.add(new menuItem(R.drawable.meduvada,"Onion Pizza",60));
+        item.add(new menuItem(R.drawable.meduvada,"Fresh Veggie",75));
+        item.add(new menuItem(R.drawable.meduvada,"Cheesy Pizza",50));item.add(new menuItem(R.drawable.meduvada,"Mushroom Pizza",60));item.add(new menuItem(R.drawable.meduvada,"Tomato Pizza",60));
+        item.add(new menuItem(R.drawable.meduvada,"Peppy Panneer",65));
+        item.add(new menuItem(R.drawable.meduvada,"Chicken Golden Delight",140));
+        item.add(new menuItem(R.drawable.meduvada,"Pepper Barbecue Chicken",120));
+        item.add(new menuItem(R.drawable.meduvada,"Chicken Sausage",130));
+        item.add(new menuItem(R.drawable.meduvada,"Burger Pizza",75));
 
 
         ListAdaptedMain update = new ListAdaptedMain(this,R.layout.listviewstructure_main,item);
