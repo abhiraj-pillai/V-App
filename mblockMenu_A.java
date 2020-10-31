@@ -29,16 +29,16 @@ public class mblockMenu extends AppCompatActivity {
         listView =  findViewById(R.id.menuList);
 
         final ArrayList<menuItem> item = new ArrayList<>();
-        item.add(new menuItem(R.drawable.noodles,"Veg Roll",35));
-        item.add(new menuItem(R.drawable.noodles,"Veg Cheese Roll",45));
-        item.add(new menuItem(R.drawable.noodles,"Veg Schezwan Roll",45));
-        item.add(new menuItem(R.drawable.noodles,"Veg Cheese Schezwan Roll",55));item.add(new menuItem(R.drawable.noodles,"Noodle Roll",40));item.add(new menuItem(R.drawable.noodles,"Paneer Chilli",60));item.add(new menuItem(R.drawable.noodles,"Potato Chilli",60));
-        item.add(new menuItem(R.drawable.noodles,"Schezwan Noodles",65));
+        item.add(new menuItem(R.drawable.vegroll,"Veg Roll",35));
+        item.add(new menuItem(R.drawable.vegcheeseroll,"Veg Cheese Roll",45));
+        item.add(new menuItem(R.drawable.vegschezwancheesefrankie,"Veg Schezwan Roll",45));
+        item.add(new menuItem(R.drawable.vegschezwancheesefrankie,"Veg Cheese Schezwan Roll",55));item.add(new menuItem(R.drawable.noodles,"Noodle Roll",40));item.add(new menuItem(R.drawable.noodles,"Paneer Chilli",60));item.add(new menuItem(R.drawable.noodles,"Potato Chilli",60));
+        item.add(new menuItem(R.drawable.schezwannoodles,"Schezwan Noodles",65));
         item.add(new menuItem(R.drawable.noodles,"Hakka Noodles",65));item.add(new menuItem(R.drawable.noodles,"Sada Dosa",30));item.add(new menuItem(R.drawable.noodles,"Masala Dosa",45));
-        item.add(new menuItem(R.drawable.noodles,"Mysore Dosa",50));
-        item.add(new menuItem(R.drawable.noodles,"Manchurian Dosa",65));
-        item.add(new menuItem(R.drawable.noodles,"Bisleri",10));
-        item.add(new menuItem(R.drawable.noodles,"Limca",20));
+        item.add(new menuItem(R.drawable.mysoredosa,"Mysore Dosa",50));
+        item.add(new menuItem(R.drawable.manchuriandosa,"Manchurian Dosa",65));
+        item.add(new menuItem(R.drawable.bisleri,"Bisleri",10));
+        item.add(new menuItem(R.drawable.limca,"Limca",20));
 
 
         ListAdaptedMain update = new ListAdaptedMain(this,R.layout.listviewstructure_main,item);
