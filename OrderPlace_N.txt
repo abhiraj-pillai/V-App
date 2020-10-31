@@ -68,6 +68,9 @@ public class Order extends AppCompatActivity {
 
                 reference.push().setValue(helperclass);
                 Toast.makeText(Order.this,"Order has been placed successfully!",Toast.LENGTH_SHORT).show();
+                
+                 Intent confirmationPage = new Intent(itemDesc.this,confirmtionPage.class);
+                startActivity(confirmationPage);
             }
         });
 
