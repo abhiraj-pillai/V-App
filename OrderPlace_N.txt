@@ -1,0 +1,372 @@
+ORDER_PLACE_N
+
+//order.java
+
+package com.example.menuu;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class Order extends AppCompatActivity {
+
+    TextView quantity,foodname,foodprice,amt,total;
+    ImageView foodphoto;
+    Button placeorder;
+    int count=1;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_order);
+
+        quantity = (TextView) findViewById(R.id.quantity);
+        foodname = (TextView) findViewById(R.id.foodname);
+        foodprice= (TextView) findViewById(R.id.foodprice);
+        foodphoto= (ImageView) findViewById(R.id.foodphoto);
+        amt = (TextView) findViewById(R.id.amt);
+        total = (TextView)findViewById(R.id.total);
+        placeorder = (Button) findViewById(R.id.placeorder);
+
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Orders");
+
+        String Temp1 = getIntent().getStringExtra("Foodname");
+        String Temp2 = getIntent().getStringExtra("Foodprice");
+
+        Integer Temp3 = getIntent().getIntExtra("Foodphoto",0);
+
+
+        foodname.setText(Temp1);
+        foodprice.setText(Temp2);
+        foodphoto.setImageResource(Temp3);
+
+        placeorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String ordername = foodname.getText().toString();
+                String orderamt = (String) amt.getText();
+                String orderquantity = quantity.getText().toString();
+
+
+                OrderHelper helperclass = new OrderHelper(ordername,orderamt,orderquantity);
+
+
+                reference.push().setValue(helperclass);
+                Toast.makeText(Order.this,"Order has been placed successfully!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
+
+
+
+
+    public void Decrement(View view)
+    {
+
+        count--;
+        if(count>=1)
+        {
+            quantity.setText(""+count);
+            int val = Integer.parseInt(foodprice.getText().toString())*count;
+            amt.setText(" "+val);
+
+
+
+        }
+        else
+            Toast.makeText(this, "Quantity can not be less than 1 !!", Toast.LENGTH_SHORT).show();;
+
+
+
+
+    }
+    public void Increment(View view)
+    {
+        count++;
+        if(count>=1)
+        {
+            quantity.setText(""+count);
+            int val = Integer.parseInt(foodprice.getText().toString())*count;
+            amt.setText(" "+val);
+
+
+        }
+
+        else
+            Toast.makeText(this, "Quantity can not be less than 1 !!", Toast.LENGTH_SHORT).show();;
+
+
+    }
+
+
+
+Order.XML
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Order">
+
+    <Button
+        android:id="@+id/minus"
+        android:layout_width="41dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:onClick="Decrement"
+        android:text="-"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/placeorder"
+        app:layout_constraintEnd_toStartOf="@+id/quantity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodprice" />
+
+    <TextView
+        android:id="@+id/foodprice"
+        android:layout_width="152dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="147dp"
+        android:layout_marginLeft="147dp"
+        android:layout_marginTop="12dp"
+        android:text="25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/foodname" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="214dp"
+        android:layout_height="79dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/vitwatermark" />
+
+    <ImageView
+        android:id="@+id/foodphoto"
+        android:layout_width="186dp"
+        android:layout_height="184dp"
+        android:layout_marginTop="9dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderdetails"
+        app:srcCompat="@drawable/samosa" />
+
+    <TextView
+        android:id="@+id/orderdetails"
+        android:layout_width="280dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="179dp"
+        android:layout_marginLeft="179dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginRight="151dp"
+        android:layout_marginBottom="9dp"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="Order Details"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/foodphoto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.572"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/foodname"
+        android:layout_width="152dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="77dp"
+        android:layout_marginLeft="77dp"
+        android:layout_marginTop="129dp"
+        android:layout_marginBottom="18dp"
+        android:text="Samosa"
+        android:textColor="@color/black"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/foodprice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/foodphoto" />
+
+    <Button
+        android:id="@+id/plus"
+        android:layout_width="40dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginRight="131dp"
+        android:layout_marginBottom="13dp"
+        android:onClick="Increment"
+        android:text="+"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/placeorder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/quantity"
+        app:layout_constraintTop_toBottomOf="@+id/foodprice" />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="54dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="50dp"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:text="0"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/plus"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/minus"
+        app:layout_constraintTop_toBottomOf="@+id/foodprice" />
+
+    <Button
+        android:id="@+id/placeorder"
+        android:layout_width="148dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="32dp"
+        android:text="Place Order"
+        app:backgroundTint="#E64A19"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/minus" />
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="139dp"
+        android:layout_marginLeft="139dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="9dp"
+        android:text="Total"
+        app:layout_constraintBottom_toTopOf="@+id/minus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodprice" />
+
+    <TextView
+        android:id="@+id/amt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginRight="162dp"
+        android:layout_marginBottom="11dp"
+        android:text="25"
+        app:layout_constraintBottom_toTopOf="@+id/plus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toEndOf="@+id/total"
+        app:layout_constraintTop_toBottomOf="@+id/foodprice"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginBottom="170dp"
+        android:text="Base Price"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="325dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginRight="27dp"
+        android:layout_marginBottom="32dp"
+        android:text="Item Selected"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toStartOf="@+id/foodname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orderdetails"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+//Order Helper Class
+
+package com.example.menuu;
+
+public class OrderHelper {
+    public OrderHelper() {
+
+    }
+
+    String ordername , orderamt , orderquantity ;
+
+    public String getOrdername() {
+        return this.ordername;
+    }
+
+    public void setOrdername(String ordername) {
+        this.ordername = ordername;
+    }
+
+    public String getOrderamt() {
+        return this.orderamt;
+    }
+
+    public void setOrderamt(String orderamt) {
+        this.orderamt = orderamt;
+    }
+
+    public String getOrderquantity() {
+        return this.orderquantity;
+    }
+
+    public void setOrderquantity(String orderquantity) {
+        this.orderquantity = orderquantity;
+    }
+
+    public OrderHelper(String ordername, String orderamt, String orderquantity) {
+        this.ordername = ordername;
+        this.orderamt = orderamt;
+        this.orderquantity = orderquantity;
+    }
+}
+
+
+}
