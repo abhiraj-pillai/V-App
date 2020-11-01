@@ -1,0 +1,665 @@
+//VHELP 
+// vhelp.java
+
+ackage com.example.vhelp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+import static com.example.vhelp.R.id.counsellorhelp;
+
+public class Vhelp extends AppCompatActivity {
+
+    Button counsellorhelp, mentorHelp;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_vhelp);
+
+        mentorHelp = (Button) findViewById(R.id.mentorHelp);
+        counsellorhelp = (Button) findViewById(R.id.counsellorhelp);
+
+        mentorHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Vhelp.this, mentor.class);
+                startActivity(intent);
+            }
+
+
+        });
+
+        counsellorhelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Vhelp.this,counsellor.class);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+//vhelp.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Vhelp">
+
+    <Button
+        android:id="@+id/counsellorhelp"
+        android:layout_width="161dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginBottom="136dp"
+        android:text="Counseller Help"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mentorHelp"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="160dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="84dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/vitwatermark" />
+
+    <Button
+        android:id="@+id/mentorHelp"
+        android:layout_width="161dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="52dp"
+        android:text="Mentor Help"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="316dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginBottom="69dp"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="SELECT FACIILITY"
+        android:textColor="#020202"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/mentorHelp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+Mentor,java
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
+public class mentor extends AppCompatActivity {
+    Spinner sem, branch , faculty , subject ;
+    Button submit;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mentor);
+
+        sem = findViewById(R.id.sem);
+        branch = findViewById(R.id.branch);
+        faculty = findViewById(R.id.faculty);
+        subject = findViewById(R.id.subject);
+        submit  = findViewById(R.id.submit);
+
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(mentor.this,mentorconfirm.class);
+                startActivity(i);
+            }
+        });
+
+        List<String> Sem = new ArrayList<>();
+        Sem.add(0,"Sem");
+        Sem.add("I");
+        Sem.add("II");
+        Sem.add("III");
+        Sem.add("IV");
+        Sem.add("V");
+        Sem.add("VI");
+        Sem.add("VII");
+        Sem.add("VIII");
+
+        List<String> Branch = new ArrayList<>();
+        Branch.add(0,"Branch");
+        Branch.add("CMPN");
+        Branch.add("IT");
+        Branch.add("EXTC");
+        Branch.add("ETRX");
+        Branch.add("BIOM");
+
+        List<String> Subject = new ArrayList<>();
+        Subject.add(0,"Subject");
+        Subject.add("Mechanics");
+        Subject.add("Engineering Maths- 1");
+        Subject.add("Engineering Maths- 2");
+        Subject.add("Engineering Maths- 3");
+        Subject.add("Engineering Maths- 4");
+        Subject.add("Circuit Theory");
+        Subject.add("Data Compression");
+        Subject.add("Difital System Design");
+        Subject.add("Communication Principles");
+        Subject.add("Linear Integrated Cicuits");
+
+        List<String> Faculty = new ArrayList<>();
+        Faculty.add(0,"Faculty");
+        Faculty.add("Saurabh Mehta");
+        Faculty.add("Mayur Nanda");
+        Faculty.add("Anand Tripathi");
+        Faculty.add("Amey Rewandkar");
+        Faculty.add("Benna Ballal");
+        Faculty.add("Santosh Jagtap");
+        Faculty.add("Uday Kashid");
+        Faculty.add("Govind Mali");
+        Faculty.add("Atul Oak");
+        Faculty.add("Amit Mourya");
+
+        ArrayAdapter<String> dataAdapter;
+        dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,Sem);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        sem.setAdapter(dataAdapter);
+
+    sem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            if(parent.getItemAtPosition(position).equals("Sem"))
+            {
+
+            }
+            else
+            {
+                String item = parent.getItemAtPosition(position).toString();
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+
+            Toast.makeText(mentor.this,"This Field is Mandatory!",Toast.LENGTH_SHORT).show();
+        }
+    });
+
+
+        ArrayAdapter<String> dataAdapter1;
+        dataAdapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,Branch);
+        dataAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        branch.setAdapter(dataAdapter1);
+
+        branch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(parent.getItemAtPosition(position).equals("Branch"))
+                {
+
+                }
+                else
+                {
+                    String item = parent.getItemAtPosition(position).toString();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+
+                Toast.makeText(mentor.this,"This Field is Mandatory!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+        ArrayAdapter<String> dataAdapter2;
+        dataAdapter2 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,Subject);
+        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        subject.setAdapter(dataAdapter2);
+
+        subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(parent.getItemAtPosition(position).equals("Subject"))
+                {
+
+                }
+                else
+                {
+                    String item = parent.getItemAtPosition(position).toString();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+
+                Toast.makeText(mentor.this,"This Field is Mandatory!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        ArrayAdapter<String> dataAdapter3;
+        dataAdapter3 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,Faculty);
+        dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        faculty.setAdapter(dataAdapter3);
+
+        faculty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(parent.getItemAtPosition(position).equals("Faculty"))
+                {
+
+                }
+                else
+                {
+                    String item = parent.getItemAtPosition(position).toString();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+
+                Toast.makeText(mentor.this,"This Field is Mandatory!",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
+}
+
+mentor.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mentor">
+
+    <Spinner
+        android:id="@+id/faculty"
+        android:layout_width="229dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="91dp"
+        android:layout_marginLeft="91dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginRight="91dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subject" />
+
+    <Spinner
+        android:id="@+id/subject"
+        android:layout_width="229dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="91dp"
+        android:layout_marginLeft="91dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginRight="91dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/branch" />
+
+    <Spinner
+        android:id="@+id/branch"
+        android:layout_width="204dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="103dp"
+        android:layout_marginLeft="103dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginRight="104dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sem" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="160dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="101dp"
+        android:layout_marginLeft="101dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="102dp"
+        android:layout_marginRight="102dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/vitwatermark" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="239dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Enter Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <Spinner
+        android:id="@+id/sem"
+        android:layout_width="219dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="93dp"
+        android:layout_marginLeft="93dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginRight="99dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="257dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="77dp"
+        android:layout_marginLeft="77dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginRight="77dp"
+        android:ems="10"
+        android:hint="Any Specific query you wish to add?"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/faculty" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="121dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginLeft="144dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="146dp"
+        android:layout_marginRight="146dp"
+        android:layout_marginBottom="60dp"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+//COunsellor.java
+
+package com.example.vhelp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class counsellor extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_counseller);
+
+        Button submit1 = findViewById(R.id.submit1);
+
+        submit1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(counsellor.this, counsellorconfirm.class);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+counsellor.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".counsellor">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="185dp"
+        android:layout_height="97dp"
+        android:layout_marginStart="113dp"
+        android:layout_marginLeft="113dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="113dp"
+        android:layout_marginRight="113dp"
+        android:src="@drawable/vitwatermark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="324dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="28dp"
+        android:text="Feel free to tell us about the problems you are facing. We are here to help you! :)"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="327dp"
+        android:layout_height="166dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Type here!"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <Button
+        android:id="@+id/submit1"
+        android:layout_width="142dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginBottom="125dp"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+//COunsellor.JAVA
+
+package com.example.vhelp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class counsellorconfirm extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_counsellorconfirm);
+    }
+}
+
+//COUNSELLOR CONFIRM.xml
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".counsellorconfirm">
+
+    <Button
+        android:id="@+id/goback"
+        android:layout_width="126dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="142dp"
+        android:layout_marginLeft="142dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="143dp"
+        android:layout_marginRight="143dp"
+        android:text="Go back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="297dp"
+        android:layout_height="216dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginLeft="57dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginRight="57dp"
+        android:text="Your query has been registered and it is safe with us! Our counsellor will get back to you soon! Take care and stay positive!"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="246dp"
+        android:layout_height="115dp"
+        android:layout_marginStart="82dp"
+        android:layout_marginLeft="82dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="83dp"
+        android:layout_marginRight="83dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/vitwatermark" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+MENTOR CONFIRM.java
+
+package com.example.vhelp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+public class mentorconfirm extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mentorconfirm);
+    }
+}
+
+MENTORCONFIRM.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mentorconfirm">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="324dp"
+        android:layout_height="276dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:gravity="center|start|center_horizontal"
+        android:text="Your query has been registered!! The Faculty you have selected will get back to you soon!"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/backbutton"
+        android:layout_width="149dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="121dp"
+        android:layout_marginLeft="121dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="141dp"
+        android:layout_marginRight="141dp"
+        android:layout_marginBottom="190dp"
+        android:text="Go Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+ 
